@@ -2,7 +2,7 @@
 #include "sys.h"
 #include "Servo.h"
 #include "control.h"	
-
+#include "camera.h"
 extern int x;
 
 u8 Ball[8];
@@ -56,6 +56,7 @@ int main()
 //  CAN1_Mode_Init(1,2,3,6,0);      //=====CAN初始化
 //--------------------------------------------------	
 //	Timer6_init();
+	Camera_Init();
 	EXTI_InitTree();
 	Ball[0]=0;
 	Ball[1]=1;
