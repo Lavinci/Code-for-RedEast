@@ -369,7 +369,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\User;..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User\SYSTEM\delay;..\User\HARDWARE\LED;..\User\HARDWARE\KEY;..\User\HARDWARE\OLED;..\User\HARDWARE\USARTX;..\User\SYSTEM\usart;..\User\HARDWARE\ADC;..\User\HARDWARE\TIMER;..\User\HARDWARE\MOTOR;..\User\HARDWARE\ENCODER;..\User\HARDWARE\IIC;..\User\HARDWARE\MPU6050;..\User\HARDWARE\show;..\User\HARDWARE\EXTI;..\User\HARDWARE\DataScope_DP;..\User\HARDWARE\CAN;..\User\HARDWARE\STMFLASH;..\User\HARDWARE\DMP;..\User\HARDWARE\ENCODER;..\User\HARDWARE\CONTROL;..\User\HARDWARE\filter;..\User\HARDWARE\Servo</IncludePath>
+              <IncludePath>..\User;..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User\SYSTEM\delay;..\User\HARDWARE\LED;..\User\HARDWARE\KEY;..\User\HARDWARE\OLED;..\User\HARDWARE\USARTX;..\User\SYSTEM\usart;..\User\HARDWARE\ADC;..\User\HARDWARE\TIMER;..\User\HARDWARE\MOTOR;..\User\HARDWARE\ENCODER;..\User\HARDWARE\IIC;..\User\HARDWARE\MPU6050;..\User\HARDWARE\show;..\User\HARDWARE\EXTI;..\User\HARDWARE\DataScope_DP;..\User\HARDWARE\CAN;..\User\HARDWARE\STMFLASH;..\User\HARDWARE\DMP;..\User\HARDWARE\ENCODER;..\User\HARDWARE\CONTROL;..\User\HARDWARE\filter;..\User\HARDWARE\Servo;..\User\HARDWARE\Camera</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -941,6 +941,16 @@
               <FileName>Servo.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\HARDWARE\Servo\Servo.h</FilePath>
+            </File>
+            <File>
+              <FileName>camera.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\HARDWARE\Camera\camera.c</FilePath>
+            </File>
+            <File>
+              <FileName>camera.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\HARDWARE\Camera\camera.h</FilePath>
             </File>
           </Files>
         </Group>
