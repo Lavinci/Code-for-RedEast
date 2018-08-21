@@ -3,7 +3,7 @@
 #include "sys.h"
 
 #define PI 3.14159265
-#define ZHONGZHI 0 
+#define ZHONGZHI 0
 #define DIFFERENCE 100
 extern	int Balance_Pwm,Velocity_Pwm,Turn_Pwm;
 int EXTI15_10_IRQHandler(void);
@@ -27,8 +27,5 @@ int Position_PID_D (int Encoder,int Target);
 void Get_RC(u8 mode);
 void Count_Velocity(void);
 void CAN_N_Usart_Control(void);
-
-void GoPosition(long int x,long int y,int time);
-
 
 #endif

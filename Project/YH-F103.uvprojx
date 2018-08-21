@@ -226,7 +226,7 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <RoSelD>3</RoSelD>
@@ -369,7 +369,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\User;..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User\SYSTEM\delay;..\User\HARDWARE\LED;..\User\HARDWARE\KEY;..\User\HARDWARE\OLED;..\User\HARDWARE\USARTX;..\User\SYSTEM\usart;..\User\HARDWARE\ADC;..\User\HARDWARE\TIMER;..\User\HARDWARE\MOTOR;..\User\HARDWARE\ENCODER;..\User\HARDWARE\IIC;..\User\HARDWARE\MPU6050;..\User\HARDWARE\show;..\User\HARDWARE\EXTI;..\User\HARDWARE\DataScope_DP;..\User\HARDWARE\CAN;..\User\HARDWARE\STMFLASH;..\User\HARDWARE\DMP;..\User\HARDWARE\ENCODER;..\User\HARDWARE\CONTROL;..\User\HARDWARE\filter;..\User\HARDWARE\Servo;..\User\HARDWARE\Camera</IncludePath>
+              <IncludePath>..\User;..\Libraries\CMSIS;..\Libraries\STM32F10x_StdPeriph_Driver\inc;..\User\SYSTEM\delay;..\User\HARDWARE\LED;..\User\HARDWARE\KEY;..\User\HARDWARE\OLED;..\User\HARDWARE\USARTX;..\User\SYSTEM\usart;..\User\HARDWARE\ADC;..\User\HARDWARE\TIMER;..\User\HARDWARE\MOTOR;..\User\HARDWARE\ENCODER;..\User\HARDWARE\IIC;..\User\HARDWARE\MPU6050;..\User\HARDWARE\show;..\User\HARDWARE\EXTI;..\User\HARDWARE\DataScope_DP;..\User\HARDWARE\CAN;..\User\HARDWARE\STMFLASH;..\User\HARDWARE\DMP;..\User\HARDWARE\ENCODER;..\User\HARDWARE\CONTROL;..\User\HARDWARE\filter;..\User\HARDWARE\Servo;..\User\HARDWARE\Camera;..\User\vl53l0x_api;..\User\vl53l0x_v1</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -952,6 +952,26 @@
               <FileType>5</FileType>
               <FilePath>..\User\HARDWARE\Camera\camera.h</FilePath>
             </File>
+            <File>
+              <FileName>distance.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\distance.c</FilePath>
+            </File>
+            <File>
+              <FileName>distance.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\distance.h</FilePath>
+            </File>
+            <File>
+              <FileName>mine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\mine.c</FilePath>
+            </File>
+            <File>
+              <FileName>mine.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\mine.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -961,6 +981,141 @@
               <FileName>程序说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\DOC\程序说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>vl530_api</GroupName>
+          <Files>
+            <File>
+              <FileName>vl53l0x_api.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api_calibration.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api_calibration.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api_calibration.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api_calibration.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api_core.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api_core.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api_ranging.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api_ranging.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api_ranging.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api_ranging.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api_strings.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api_strings.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_api_strings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_api_strings.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_def.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_device.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_device.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_interrupt_threshold_settings.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_interrupt_threshold_settings.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_tuning.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_api\vl53l0x_tuning.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>vl530_v1</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_v1\stm32_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32_i2c.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_v1\stm32_i2c.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0x.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0x_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_i2c_platform.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0x_i2c_platform.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_platform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0x_platform.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_platform.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0x_platform.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_platform_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0x_platform_log.c</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_platform_log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0x_platform_log.h</FilePath>
+            </File>
+            <File>
+              <FileName>vl53l0x_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\vl53l0x_v1\vl53l0x_types.h</FilePath>
             </File>
           </Files>
         </Group>
