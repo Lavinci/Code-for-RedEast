@@ -43,75 +43,17 @@ void Kinematic_Analysis2(float Vx,float Vy,float Vz)
          5ms定时中断由MPU6050的INT引脚触发
          严格保证采样和数据处理的时间同步
 **************************************************************************/
-/*
-void TIM6_IRQHandler(void)
-{
-	if(TIM_GetITStatus(TIM6,TIM_IT_Update)==SET)
-	{
-		TIM_ClearITPendingBit(TIM6,TIM_FLAG_Update);
-	//	GPIOB->ODR^=GPIO_Pin_13;
-//----------------------------------------------------------
-			if(Flag_Target==1)                                                  //5ms读取一次陀螺仪和加速度计的值
-			{
-					if(Usart_Flag==0&&Usart_ON_Flag==1)  memcpy(rxbuf,Urxbuf,8*sizeof(u8));	//如果解锁了串口控制标志位，进入串口控制模式
-					Read_DMP();                                                           //===更新姿态
-			  	Key();//扫描按键变化
-			}                                                                     //===10ms控制一次，为了保证M法测速的时间基准，首先读取编码器数据
-			Encoder_A=Read_Encoder(2);                                          //===读取编码器的值
-			Position_A+=Encoder_A;                                                 //===积分得到速度
-			Encoder_B=Read_Encoder(3);                                          //===读取编码器的值
-			Position_B+=Encoder_B;                                                 //===积分得到速度
-			Encoder_C=-Read_Encoder(4);                                         //===读取编码器的值
-			Position_C+=Encoder_C;                                                 //===积分得到速度
-			Encoder_D=-Read_Encoder(5);                                         //===读取编码器的值
-			Position_D+=Encoder_D;                                                 //===积分得到速度
-	  	Read_DMP();                                                            //===更新姿态
-  		Led_Flash(100);                                                        //===LED闪烁;常规模式 1s改变一次指示灯的状态
-			Voltage_All+=Get_battery_volt();                                       //多次采样累积
-			if(++Voltage_Count==100) Voltage=Voltage_All/100,Voltage_All=0,Voltage_Count=0;//求平均值 获取电池电压
-			if(RC_Velocity>0&&RC_Velocity<15)  RC_Velocity=15;                   //避免电机进入低速非线性区
 
-			if(Turn_Off(Voltage)==0)               //===如果电池电压不存在异常
-		 {
-		  if(Run_Flag==0)//速度模式
-			{
-				Motor_A=Incremental_PI_A(Encoder_A,Target_A);                         //===速度闭环控制计算电机A最终PWM
-				Motor_B=Incremental_PI_B(Encoder_B,Target_B);                         //===速度闭环控制计算电机B最终PWM
-				Motor_C=Incremental_PI_C(Encoder_C,Target_C);                         //===速度闭环控制计算电机C最终PWM
-				Motor_D=Incremental_PI_D(Encoder_D,Target_D);                         //===速度闭环控制计算电机C最终PWM
-			}
-			 else//位置模式
-			{
-
-					Motor_A=Position_PID_A(Position_A,Target_A)>>8;//位置闭环控制，计算电机A速度内环的输入量
-					Motor_B=Position_PID_B(Position_B,Target_B)>>8;//位置闭环控制，计算电机B速度内环的输入量
-					Motor_C=Position_PID_C(Position_C,Target_C)>>8;//位置闭环控制，计算电机C速度内环的输入量
-				 	Motor_D=Position_PID_D(Position_D,Target_D)>>8;//位置闭环控制，计算电机C速度内环的输入量
-
-					Xianfu_Velocity(RC_Velocity,RC_Velocity,RC_Velocity,RC_Velocity);
-					Motor_A=Incremental_PI_A(Encoder_A,-Motor_A);         //===速度闭环控制计算电机A最终PWM
-					Motor_B=Incremental_PI_B(Encoder_B,-Motor_B);         //===速度闭环控制计算电机B最终PWM
-					Motor_C=Incremental_PI_C(Encoder_C,-Motor_C);         //===速度闭环控制计算电机C最终PWM
-					Motor_D=Incremental_PI_D(Encoder_D,-Motor_D);         //===速度闭环控制计算电机C最终PWM
-			}
-		 Xianfu_Pwm(6900);                     //===PWM限幅
-		 Set_Pwm(Motor_A,Motor_B,Motor_C,Motor_D);     //===赋值给PWM寄存器
-		 }
-	}
-}*/
 int EXTI15_10_IRQHandler(void) //5ms
 {
 	 if(INT==0)
-	{
+	 {
 		  EXTI->PR=1<<15;                                                      //清除LINE5上的中断标志位
 		  Flag_Target=!Flag_Target;
 		  if(delay_flag==1)
 			 {
-				 //if(++delay_50==10)	 delay_50=0,delay_flag=0;                     //给主函数提供50ms的精准延时
-			//	 if(++delay_50==200)	 delay_50=0,delay_flag=0;                     //给主函数提供50*20ms的精准延时
 				 ++delay_5ms;                     //给主函数提供50*20ms的精准延时
 			 }
-		//	 GPIOB->ODR^=GPIO_Pin_13;
 		  if(Flag_Target==1)                                                  //5ms读取一次陀螺仪和加速度计的值
 			{
 					Read_DMP();                                                           //===更新姿态
@@ -137,38 +79,15 @@ int EXTI15_10_IRQHandler(void) //5ms
 		 {
 		  if(Run_Flag==0)//速度模式
 			{
-				//if(CAN_ON_Flag==0&&Usart_ON_Flag==0)
-				//Get_RC(Run_Flag);                //===串口和CAN控制都未使能，则接收蓝牙遥控指
+
 				Motor_A=Incremental_PI_A(Encoder_A,Target_A);                         //===速度闭环控制计算电机A最终PWM
 				Motor_B=Incremental_PI_B(Encoder_B,Target_B);                         //===速度闭环控制计算电机B最终PWM
 				Motor_C=Incremental_PI_C(Encoder_C,Target_C);                         //===速度闭环控制计算电机C最终PWM
 				Motor_D=Incremental_PI_D(Encoder_D,Target_D);                         //===速度闭环控制计算电机C最终PWM
 			}
-			//  else//位置模式
-			// {
-			// /*	if(CAN_ON_Flag==0&&Usart_ON_Flag==0) //===串口和CAN控制都未使能，则接收蓝牙遥控指令
-			// 	 {
-			// 		if(Turn_Flag==0) 	Flag_Direction=x;//click_RC();
-			// 		Get_RC(Run_Flag);
-			// 		 x=0;
-			// 	 }*/
-			// 	  Get_RC(Run_Flag);
-			// 		Motor_A=Position_PID_A(Position_A,Target_A)>>8;//位置闭环控制，计算电机A速度内环的输入量
-			// 		Motor_B=Position_PID_B(Position_B,Target_B)>>8;//位置闭环控制，计算电机B速度内环的输入量
-			// 		Motor_C=Position_PID_C(Position_C,Target_C)>>8;//位置闭环控制，计算电机C速度内环的输入量
-			// 	 	Motor_D=Position_PID_D(Position_D,Target_D)>>8;//位置闭环控制，计算电机C速度内环的输入量
 
-			//  //  if(rxbuf[0]!=2)  Count_Velocity();   //这是调节位置控制过程的速度大小
-			// 		//else
-			// 		Xianfu_Velocity(RC_Velocity,RC_Velocity,RC_Velocity,RC_Velocity);
-			// 		Motor_A=Incremental_PI_A(Encoder_A,-Motor_A);         //===速度闭环控制计算电机A最终PWM
-			// 		Motor_B=Incremental_PI_B(Encoder_B,-Motor_B);         //===速度闭环控制计算电机B最终PWM
-			// 		Motor_C=Incremental_PI_C(Encoder_C,-Motor_C);         //===速度闭环控制计算电机C最终PWM
-			// 		Motor_D=Incremental_PI_D(Encoder_D,-Motor_D);         //===速度闭环控制计算电机C最终PWM
-			// }
 		 Xianfu_Pwm(6900);                     //===PWM限幅
 		 Set_Pwm(Motor_A,Motor_B,Motor_C,Motor_D);     //===赋值给PWM寄存器
-// Set_Pwm(1000,1000,1000,1000);
 		 }
  }
 	 return 0;

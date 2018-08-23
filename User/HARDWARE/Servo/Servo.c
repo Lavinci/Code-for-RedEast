@@ -73,30 +73,6 @@ void ServoInit(void)
 
 }
 
-void Timer6_init(void)
-{
-  NVIC_InitTypeDef ns;
-  TIM_TimeBaseInitTypeDef tis;
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6,ENABLE);
-
-  ns.NVIC_IRQChannel=TIM6_IRQn;
-  ns.NVIC_IRQChannelPreemptionPriority=2;
-  ns.NVIC_IRQChannelSubPriority=1;
-  ns.NVIC_IRQChannelCmd=ENABLE;
-  NVIC_Init(&ns);
-
-  tis.TIM_Prescaler=7199;
-  tis.TIM_ClockDivision=0;
-  tis.TIM_CounterMode=TIM_CounterMode_Up;
-  tis.TIM_Period=49;
-  tis.TIM_RepetitionCounter=0;
-  TIM_TimeBaseInit(TIM6,&tis);
-
-  TIM_UpdateRequestConfig(TIM6,TIM_UpdateSource_Regular);
-  TIM_Cmd(TIM6,ENABLE);
-  TIM_ITConfig(TIM6,TIM_IT_Update,ENABLE);
-}
-
 
 void Servo_Right(void)
 {
@@ -157,19 +133,19 @@ void EXTI4_IRQHandler()
   {
     	EXTI_ClearITPendingBit(EXTI_Line4);
 		
-//------------¹Ø±ÕÎ»ÖÃPID£¬ÉèÖÃµç»úËÙ¶ÈÎªÁã-----------------------------	
+//------------ï¿½Ø±ï¿½Î»ï¿½ï¿½PIDï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ù¶ï¿½Îªï¿½ï¿½-----------------------------	
   ns.NVIC_IRQChannel=EXTI15_10_IRQn;
   ns.NVIC_IRQChannelCmd=DISABLE;
   NVIC_Init(&ns);	
 	Set_Pwm(0,0,0,0);
 
-//Õâ¸öÊÇÓÃÊ÷Ý®ÅÉ·µ»ØµÄÊýÖµ±íÀ´È·ÈÏ»÷´òÄÄÒ»±ß
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý®ï¿½É·ï¿½ï¿½Øµï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½È·ï¿½Ï»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
   if(Ball[0])
-	  Servo_Right();//ÓÒ»÷´ò
+	  Servo_Right();//ï¿½Ò»ï¿½ï¿½ï¿½
   if(Ball[1])
-    Servo_Left();//»÷´ò×ó±Û
+    Servo_Left();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-//---------¿ªÆôÎ»ÖÃPID-------------------------		
+//---------ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½PID-------------------------		
 	ns.NVIC_IRQChannel=EXTI15_10_IRQn;
   ns.NVIC_IRQChannelCmd=ENABLE;
 	NVIC_Init(&ns);	

@@ -8,7 +8,6 @@
 #include "stm32f10x_tim.h"
 
 void ServoInit(void);
-void Timer6_init(void);
 
 void Servo_Right(void);
 

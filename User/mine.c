@@ -3,6 +3,7 @@
 #include "stm32f10x.h"
 #include "sys.h"
 #include "mine.h"
+#include "sensor.h"
 
 
 extern long int Target_A,Target_B,Target_C,Target_D;
@@ -24,6 +25,11 @@ void SABCD(long int MotoASpeed,long int MotoBSpeed,long int MotoCSpeed,long int 
   Target_B = MotoBSpeed;
   Target_C = MotoCSpeed;
   Target_D = MotoDSpeed;
+}
+
+void Stop()
+{
+	SABCD(0,0,0,0);
 }
 
 void Go(int speed,int time)
@@ -69,9 +75,30 @@ void RGo(int speed,int time)
 
 void XunJi(long int time)
 {
+	uint16_t status;
+	status=GetDis();
 
+	switch(status)
+	{
+		case 0: Stop();break;
+		case 1: LGo(10,50);break;
+		case 2:	RGo(10,50);break;
+		case 3: Go(10,50);break;
+	}
 
+}
 
+void XunJi2(long int time)
+{
+	uint16_t status;
+	status=GetDis();
+	switch(status)
+	{
+		case 0: Stop();break;
+		case 1: LGo(10,50);break;
+		case 2:	RGo(10,50);break;
+		case 3: Go(10,50);break;
+	}
 }
 
 void GoPosition(long int x,long int y,long int time)

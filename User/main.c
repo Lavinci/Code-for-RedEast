@@ -1,9 +1,5 @@
 #include "sys.h"
-#include "Servo.h"
-#include "control.h"
-#include "camera.h"
-#include "mine.h"
-#include "distance.h"
+
 
 u8 Ball[8];
 //------------------------------------
@@ -38,12 +34,12 @@ int main()
 	JTAG_Set(SWD_ENABLE);           //=====打开SWD接口 可以利用主板的SWD接口调试
 	LED_Init();                     //=====初始化与 LED 连接的硬件接口
 	KEY_Init();                     //=====按键初始化
+	/* 这里预留为跑路或者栽树模式
 	if(MODE==0)Run_Flag=1;          //=====启动的过程中，根据模式选择开关确定进入位置模式还是速度模式
 	else Run_Flag=0;                //=====启动的过程中，根据模式选择开关确定进入位置模式还是速度模式
+	*/
 	OLED_Init();                    //=====OLED初始化
-//	uart_init(72,128000);           //=====串口1初始化
 	uart2_init(36,9600);            //=====串口2初始化
-//  uart3_init(36,115200);          //=====串口3初始化
 	Encoder_Init_TIM2();            //=====编码器接口
 	Encoder_Init_TIM3();            //=====编码器接口
 	Encoder_Init_TIM4();            //=====初始化编码器C
@@ -55,33 +51,16 @@ int main()
 	MiniBalance_PWM_Init(7199,0);   //=====初始化PWM 10KHZ，用于驱动电机
 	if(KEY==0) Flash_Read();        //=====读取Flash里面的参数
   EXTI_Initmm();                  //=====MPU6050 5ms定时中断初始化
-	DisInit();
-//  CAN1_Mode_Init(1,2,3,6,0);    //=====CAN初始化
-//--------------------------------------------------
-//	Timer6_init();
-	Camera_Init();
-	EXTI_InitTree();
+	DisInit();											//底下光电的初始化
+	EXTI_InitTree();								//树中断的初始化
+	Camera_Init();									//树莓派接口初始化
+
 	Ball[0]=0;
 	Ball[1]=1;
 
 
 	while(1)
 	{
-		tmp = GetDis(0);
-		OLED_ShowNumber(15,20,tmp,5,12);OLED_Refresh_Gram();
-		delayy(200);
-		
-		tmp=GetDis(1);
-		OLED_ShowNumber(15,20,tmp,5,12);OLED_Refresh_Gram();
-		delayy(200);
-		
-		tmp=GetDis(2);
-		OLED_ShowNumber(15,20,tmp,5,12);OLED_Refresh_Gram();
-		delayy(200);
-		
-		tmp=GetDis(3);
-		OLED_ShowNumber(15,20,tmp,5,12);OLED_Refresh_Gram();
-		delayy(200);
 		
 	}
 }

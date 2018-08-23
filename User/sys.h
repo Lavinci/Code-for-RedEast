@@ -81,7 +81,11 @@
 #include "DataScope_DP.h"
 #include "CAN.h"
 #include "stmflash.h"
-//#include "Servo.h"
+#include "Servo.h"
+#include "control.h"
+#include "camera.h"
+#include "mine.h"
+#include "sensor.h"
 
 #define JTAG_SWD_DISABLE   0X02
 #define SWD_ENABLE         0X01
