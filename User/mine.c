@@ -15,7 +15,7 @@ void delayy(int time)
 {
 	delay_flag=1;
 	delay_5ms=0;
-	while(delay_5ms<time){;} //{oled_show();}
+	while(delay_5ms<time){oled_show();}//{;} //
 	delay_flag=0;
 }
 
@@ -73,7 +73,18 @@ void RGo(int speed,int time)
 	delayy(time);
 }
 
-void XunJi(long int time)
+void Left(long int speed,long int time)
+{
+	SABCD(speed,-speed,speed,-speed);				
+	delayy(time);
+}
+void Right(long int speed,long int time)
+{
+	SABCD(-speed,speed,-speed,speed);				
+	delayy(time);
+}
+
+void walk(long int time)
 {
 	uint16_t status;
 	status=GetDis();
@@ -81,23 +92,25 @@ void XunJi(long int time)
 	switch(status)
 	{
 		case 0: Stop();break;
-		case 1: LGo(10,50);break;
-		case 2:	RGo(10,50);break;
-		case 3: Go(10,50);break;
+		case 1: RGo(10,time);break;
+		case 2:	LGo(10,time);break;
+		case 3: Go(10,time);break;
+		default:OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
 	}
 
 }
 
-void XunJi2(long int time)
+void walk2(long int time)
 {
 	uint16_t status;
 	status=GetDis();
 	switch(status)
 	{
-		case 0: Stop();break;
-		case 1: LGo(10,50);break;
-		case 2:	RGo(10,50);break;
-		case 3: Go(10,50);break;
+		case 0: Go(10,time);break;
+		case 1: LGo(10,time);break;
+		//case 2:	RGo(10,50);break;
+		//case 3: Go(10,50);break;
+		default: OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
 	}
 }
 

@@ -15,8 +15,85 @@ void EXTI_Initmm(void)
 	Ex_NVIC_Config(GPIO_B,15,FTIR);		//下降沿触发
 	MY_NVIC_Init(2,1,EXTI15_10_IRQn,2);  	//抢占2，子优先级1，组2
 }
+void EXTImm_Enable(void)
+{
+	NVIC_InitTypeDef ns;
+	ns.NVIC_IRQChannel=EXTI15_10_IRQn;
+	ns.NVIC_IRQChannelPreemptionPriority=2;
+	ns.NVIC_IRQChannelSubPriority=1;
+	ns.NVIC_IRQChannelCmd=ENABLE;
+	NVIC_Init(&ns);
+}
+
+void EXTImm_Disable(void)
+{
+	NVIC_InitTypeDef ns;
+	ns.NVIC_IRQChannel=EXTI15_10_IRQn;
+	ns.NVIC_IRQChannelPreemptionPriority=2;
+	ns.NVIC_IRQChannelSubPriority=1;
+	ns.NVIC_IRQChannelCmd=DISABLE;
+	NVIC_Init(&ns);
+}
 
 void EXTI_InitTree(void)
+{
+	GPIO_InitTypeDef gs;
+	NVIC_InitTypeDef ns;
+	EXTI_InitTypeDef es;
+	
+	gs.GPIO_Pin=GPIO_Pin_4;
+	gs.GPIO_Mode=GPIO_Mode_IPU;
+	gs.GPIO_Speed=GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA,&gs);
+	gs.GPIO_Pin=GPIO_Pin_3;
+	gs.GPIO_Mode=GPIO_Mode_IPU;
+	gs.GPIO_Speed=GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA,&gs);
+	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
+// EXTI4
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+	ns.NVIC_IRQChannel=EXTI4_IRQn;
+	ns.NVIC_IRQChannelPreemptionPriority=2;
+	ns.NVIC_IRQChannelSubPriority=0;
+	ns.NVIC_IRQChannelCmd=ENABLE;
+	NVIC_Init(&ns);
+// EXTI3
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+	ns.NVIC_IRQChannel=EXTI3_IRQn;
+	ns.NVIC_IRQChannelPreemptionPriority=2;
+	ns.NVIC_IRQChannelSubPriority=0;
+	ns.NVIC_IRQChannelCmd=ENABLE;
+	NVIC_Init(&ns);
+
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,GPIO_PinSource4);
+	es.EXTI_Line=EXTI_Line4;
+	es.EXTI_Mode=EXTI_Mode_Interrupt;
+	es.EXTI_Trigger=EXTI_Trigger_Falling;
+	es.EXTI_LineCmd=ENABLE;
+	EXTI_Init(&es);
+	
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,GPIO_PinSource3);
+	es.EXTI_Line=EXTI_Line3;
+	es.EXTI_Mode=EXTI_Mode_Interrupt;
+	es.EXTI_Trigger=EXTI_Trigger_Falling;
+	es.EXTI_LineCmd=ENABLE;
+	EXTI_Init(&es);
+	
+	
+}
+void EXTI_EnableTree(void)
+{
+	NVIC_InitTypeDef ns;
+	ns.NVIC_IRQChannel=EXTI4_IRQn;
+	ns.NVIC_IRQChannelPreemptionPriority=0;
+	ns.NVIC_IRQChannelSubPriority=0;
+	ns.NVIC_IRQChannelCmd=ENABLE;
+	NVIC_Init(&ns);
+
+}
+
+void EXTI_DisableTree(void)
 {
 	GPIO_InitTypeDef gs;
 	NVIC_InitTypeDef ns;
@@ -28,9 +105,8 @@ void EXTI_InitTree(void)
 	GPIO_SetBits(GPIOA,GPIO_Pin_4);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
 
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
 	ns.NVIC_IRQChannel=EXTI4_IRQn;
-	ns.NVIC_IRQChannelPreemptionPriority=2;
+	ns.NVIC_IRQChannelPreemptionPriority=0;
 	ns.NVIC_IRQChannelSubPriority=0;
 	ns.NVIC_IRQChannelCmd=ENABLE;
 	NVIC_Init(&ns);

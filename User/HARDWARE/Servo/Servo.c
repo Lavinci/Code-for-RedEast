@@ -73,7 +73,6 @@ void ServoInit(void)
 
 }
 
-
 void Servo_Right(void)
 {
   int i;
@@ -133,24 +132,44 @@ void EXTI4_IRQHandler()
   {
     	EXTI_ClearITPendingBit(EXTI_Line4);
 		
-//------------ï¿½Ø±ï¿½Î»ï¿½ï¿½PIDï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ù¶ï¿½Îªï¿½ï¿½-----------------------------	
+//------------¹Ø±ÕÎ»ÖÃPID£¬ÉèÖÃµç»úËÙ¶ÈÎªÁã-----------------------------	
   ns.NVIC_IRQChannel=EXTI15_10_IRQn;
   ns.NVIC_IRQChannelCmd=DISABLE;
   NVIC_Init(&ns);	
 	Set_Pwm(0,0,0,0);
 
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý®ï¿½É·ï¿½ï¿½Øµï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½È·ï¿½Ï»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
-  if(Ball[0])
-	  Servo_Right();//ï¿½Ò»ï¿½ï¿½ï¿½
+//Õâ¸öÊÇÓÃÊ÷Ý®ÅÉ·µ»ØµÄÊýÖµ±íÀ´È·ÈÏ»÷´òÄÄÒ»±ß
   if(Ball[1])
-    Servo_Left();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    Servo_Left();//»÷´ò×ó±Û
 
-//---------ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½PID-------------------------		
+//---------¿ªÆôÎ»ÖÃPID-------------------------		
 	ns.NVIC_IRQChannel=EXTI15_10_IRQn;
   ns.NVIC_IRQChannelCmd=ENABLE;
 	NVIC_Init(&ns);	
   }
 }
 
+void EXTI3_IRQHandler()
+{
+	if(EXTI_GetITStatus(EXTI_Line3)!=RESET)
+  {
+    	EXTI_ClearITPendingBit(EXTI_Line3);
+		
+//------------¹Ø±ÕÎ»ÖÃPID£¬ÉèÖÃµç»úËÙ¶ÈÎªÁã-----------------------------	
+  ns.NVIC_IRQChannel=EXTI15_10_IRQn;
+  ns.NVIC_IRQChannelCmd=DISABLE;
+  NVIC_Init(&ns);	
+	Set_Pwm(0,0,0,0);
+
+//Õâ¸öÊÇÓÃÊ÷Ý®ÅÉ·µ»ØµÄÊýÖµ±íÀ´È·ÈÏ»÷´òÄÄÒ»±ß
+  if(Ball[0])
+	  Servo_Right();//ÓÒ»÷´ò
+
+//---------¿ªÆôÎ»ÖÃPID-------------------------		
+	ns.NVIC_IRQChannel=EXTI15_10_IRQn;
+  ns.NVIC_IRQChannelCmd=ENABLE;
+	NVIC_Init(&ns);	
+  }
+}
 
 	
