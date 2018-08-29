@@ -94,7 +94,7 @@ void walk(long int Runtime,long int Alltime)
 	while(delay_5ms1<Alltime)
 	{
 		status=GetDis();
-		if(status >= 8) {delay_5ms1=Alltime;}
+		if(status >= 8) {Stop();delay_5ms1=Alltime;}
 		switch(status)
 		{
 			case 0: TurnLeft(10,1);break;

@@ -65,16 +65,55 @@ int main()
 
 	while(1)
 	{
-//		Go(20,200);
-		walk(50,4000);
-//		Go(10,50);
-//		Stop();
-//		SetState(1);
-//		delayy(1000);
-////		
-//		Go(15,100);
-//		Stop();
-//		while(1);
+		//出发
+		Go(20,200);
+
+		walk(50,40000);
+		Go(10,200);
+		Stop();
+		SetState(1); //到达垄1
+
+		walk(50,40000);
+		Go(10,200);
+		Stop();
+		SetState(2); //到达垄2
+
+		walk(50,40000);
+		Go(10,200);
+		Stop();
+		SetState(3); //到达垄3
+
+		walk(50,40000);
+		Go(10,200);
+		Stop();
+		SetState(1); //到达垄4
+
+		walk(50,40000);
+		Go(10,200);
+		Stop();
+		SetState(1); //到达垄5
+
+		TurnRight(10,200);//转弯
+		
+		walk(50,40000);
+		Go(10,50);//1到头右转弯
+		TurnRight(10,200);
+		go(10,50);
+		TurnRight(10,50);
+
+		walk(50,40000);
+		Go(10,50);//2到头左转弯
+		TurnLeft(10,200);
+		go(10,50);
+		TurnLeft(10,50);
+
+		walk(50,40000);
+		Go(10,50);//2到头右转弯
+		TurnLeft(10,200);
+		go(10,50);
+		TurnLeft(10,50);
+
+		while(1);
 	}
 
 }
