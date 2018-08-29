@@ -15,7 +15,7 @@ void Left(long int speed,long int time);
 void Right(long int speed,long int time);
 
 void delayy(int time);
-void walk(long int time);
+void walk(long int Runtime,long int Alltime);
 void walk2(long int time);
 
 //位置式

@@ -9,7 +9,9 @@
 extern long int Target_A,Target_B,Target_C,Target_D;
 extern int delay_5ms;
 extern u8 delay_flag;
+extern u8 delay_flag1;
 extern float Move_X,Move_Y,Move_Z;
+int delay_5ms1;
 
 void delayy(int time)
 {
@@ -84,20 +86,26 @@ void Right(long int speed,long int time)
 	delayy(time);
 }
 
-void walk(long int time)
+void walk(long int Runtime,long int Alltime)
 {
 	uint16_t status;
-	status=GetDis();
-
-	switch(status)
+	delay_flag1=1;
+	delay_5ms1=0;
+	while(delay_5ms1<Alltime)
 	{
-		case 0: Stop();break;
-		case 1: RGo(10,time);break;
-		case 2:	LGo(10,time);break;
-		case 3: Go(10,time);break;
-		default:OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
+		status=GetDis();
+		if(status >= 8) {delay_5ms1=Alltime;}
+		switch(status)
+		{
+			case 0: TurnLeft(10,1);break;
+			case 1: Right(10,1);break;
+			case 2:	Left(10,1);break;
+			case 3: Go(25,Runtime);break;
+			case 4: TurnRight(10,1);break;
+			default:OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
+		}
 	}
-
+	delay_flag1=0;
 }
 
 void walk2(long int time)

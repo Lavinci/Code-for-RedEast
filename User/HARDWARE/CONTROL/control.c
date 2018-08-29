@@ -12,7 +12,8 @@ float Voltage_Count,Voltage_All; 											 //电压采样相关变量
 float Gyro_K=0.004;     				  											//陀螺仪比例系数
 int j;
 
-
+extern int delay_5ms1;
+extern u8 delay_flag1;
 int x;
 int delay_5ms=0;
 
@@ -62,6 +63,12 @@ int EXTI15_10_IRQHandler(void) //5ms
 				 //if(++delay_50==10)	 delay_50=0,delay_flag=0;                     //给主函数提供50ms的精准延时
 			//	 if(++delay_50==200)	 delay_50=0,delay_flag=0;                     //给主函数提供50*20ms的精准延时
 				 ++delay_5ms;                     //给主函数提供50*20ms的精准延时
+			 }
+			 if(delay_flag1==1)
+			 {
+				 //if(++delay_50==10)	 delay_50=0,delay_flag=0;                     //给主函数提供50ms的精准延时
+			//	 if(++delay_50==200)	 delay_50=0,delay_flag=0;                     //给主函数提供50*20ms的精准延时
+				 ++delay_5ms1;                     //给主函数提供50*20ms的精准延时
 			 }
 //			 GPIOB->ODR^=GPIO_Pin_13;
 		  if(Flag_Target==1)                                                  //5ms读取一次陀螺仪和加速度计的值

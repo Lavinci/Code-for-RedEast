@@ -14,8 +14,12 @@ void DisInit(void)
   gs.GPIO_Mode=GPIO_Mode_IPU;
   gs.GPIO_Speed=GPIO_Speed_50MHz;
   GPIO_Init(FRONT_PORT,&gs);
-	gs.GPIO_Pin=BEHIND_PIN;
-  GPIO_Init(BEHIND_PORT,&gs);
+	gs.GPIO_Pin=JIGUANG1_PIN;
+  GPIO_Init(JIGUANG1_PORT,&gs);
+  gs.GPIO_Pin=JIGUANG2_PIN;
+  GPIO_Init(JIGUANG2_PORT,&gs);
+	gs.GPIO_Pin=JIGUANG3_PIN;
+  GPIO_Init(JIGUANG3_PORT,&gs);
 }
 /**
  * @brief Get the Dis object
@@ -28,11 +32,18 @@ void DisInit(void)
 uint16_t GetDis(void)
 {
   uint16_t value=0;
-  if(FRONT_In == 0){
+
+  if(JIGUANG1_In == 1){
+    value+=4;
+  }
+  if(JIGUANG2_In == 1){
+    value+=2;
+  }
+	if(JIGUANG3_In == 1){//光电检测到返回0
     value+=1;
   }
-  if(BEHIND_In == 0){
-    value+=2;
+  if(FRONT_In == 0){//光电检测到返回0
+    value+=8;
   }
 	return value;
 }
