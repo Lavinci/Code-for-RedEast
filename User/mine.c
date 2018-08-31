@@ -12,7 +12,27 @@ extern u8 delay_flag;
 extern u8 delay_flag1;
 extern float Move_X,Move_Y,Move_Z;
 int delay_5ms1;
-
+#define A 5
+uint16_t filter(uint16_t in)
+{
+	int i,j,min,tmp,buff[50];
+	for(i=0;i<50;i++)
+	{
+		buff[i]=GetDis();
+	}
+	min=0;
+	for(i=0;i<49;i++)
+	{	for(j=i;j<49;j++)
+		{
+			if(buff[j
+				]<buff[min]) min=j;
+		}
+		tmp=buff[j];
+		buff[j]=buff[i];
+		buff[i]=tmp;
+	}
+	return buff[3];
+}
 void delayy(int time)
 {
 	delay_flag=1;
@@ -93,35 +113,69 @@ void walk(long int Runtime,long int Alltime)
 	delay_5ms1=0;
 	while(delay_5ms1<Alltime)
 	{
-		status=GetDis();
-		if(status >= 8) {Stop();delay_5ms1=Alltime;}
+		status=filter(10);
+		if(FRONT_In == 0){ Stop();delay_5ms1=Alltime; }
 		switch(status)
 		{
-			case 0: TurnLeft(10,1);break;
-			case 1: Right(10,1);break;
-			case 2:	Left(10,1);break;
-			case 3: Go(25,Runtime);break;
-			case 4: TurnRight(10,1);break;
-			default:OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
+			case 0: Left(13,1);break;
+			//case 1: Right(10,1);break;
+			case 2:	Go(35,1);break;
+			case 3: TurnLeft(18,1);break;
+		//	case 4: TurnRight(10,1);break;
+		case 6: TurnRight(18,1);break;
+		case 7:Right(13,1);break;
+		default:OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
 		}
 	}
 	delay_flag1=0;
 }
 
-void walk2(long int time)
+void walk2(long int Runtime,long int Alltime)
 {
 	uint16_t status;
-	status=GetDis();
-	switch(status)
+	delay_flag1=1;
+	delay_5ms1=0;
+	while(delay_5ms1<Alltime)
 	{
-		case 0: Go(10,time);break;
-		case 1: LGo(10,time);break;
-		//case 2:	RGo(10,50);break;
-		//case 3: Go(10,50);break;
-		default: OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
+		status=filter(10);
+		if(FRONT_In == 1){ Stop();delay_5ms1=Alltime; }
+		switch(status)
+		{
+			case 0: Left(13,1);break;
+			//case 1: Right(10,1);break;
+			case 2:	Go(35,1);break;
+			case 3: TurnLeft(18,1);break;
+		//	case 4: TurnRight(10,1);break;
+		case 6: TurnRight(18,1);break;
+		case 7:Right(13,1);break;
+		default:OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
+		}
 	}
+	delay_flag1=0;
 }
-
+void walk3(long int Runtime,long int Alltime)
+{
+	uint16_t status;
+	delay_flag1=1;
+	delay_5ms1=0;
+	while(delay_5ms1<Alltime)
+	{
+		status=filter(10);
+		if(FRONT_In == 0){ Stop();delay_5ms1=Alltime; }
+		switch(status)
+		{
+			case 0: Left(13,1);break;
+			//case 1: Right(10,1);break;
+			case 2:	Back(35,1);break;
+			case 3: TurnLeft(18,1);break;
+		//	case 4: TurnRight(10,1);break;
+		case 6: TurnRight(18,1);break;
+		case 7:Right(13,1);break;
+		default:OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
+		}
+	}
+	delay_flag1=0;
+}
 void GoPosition(long int x,long int y,long int time)
 {
 			Move_X=x;

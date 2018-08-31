@@ -3,7 +3,7 @@
 
 //速度式
 void SABCD(long int MotoASpeed,long int MotoBSpeed,long int MotoCSpeed,long int MotoDSpeed);
-
+uint16_t filter(uint16_t in);
 void Go(long int speed,long int time);
 void Stop(void);
 void Back(long int speed,long int time);
@@ -16,7 +16,8 @@ void Right(long int speed,long int time);
 
 void delayy(int time);
 void walk(long int Runtime,long int Alltime);
-void walk2(long int time);
+void walk2(long int Runtime,long int Alltime);
+void walk3(long int Runtime,long int Alltime);
 
 //位置式
 void GoPosition(long long int x,long long int y,long int time);

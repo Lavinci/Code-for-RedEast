@@ -33,17 +33,14 @@ uint16_t GetDis(void)
 {
   uint16_t value=0;
 
-  if(JIGUANG1_In == 1){
+  if(JIGUANG1_In == 0){
     value+=4;
   }
-  if(JIGUANG2_In == 1){
+  if(JIGUANG2_In == 0){
     value+=2;
   }
-	if(JIGUANG3_In == 1){//光电检测到返回0
+	if(JIGUANG3_In == 0){//光电检测到返回0
     value+=1;
-  }
-  if(FRONT_In == 0){//光电检测到返回0
-    value+=8;
   }
 	return value;
 }
