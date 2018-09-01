@@ -184,5 +184,27 @@ void GoPosition(long int x,long int y,long int time)
 	delayy(time);
 }
 
+void strightR()
+{
+	walk2(50,40000);
+	Go(20,100);
+	TurnRight(20,250);
+	Go(20,100);
+	walk(50,40000);
+	Go(20,400);
+	TurnRight(20,250);
+	Go(20,400);
+}
+void strightL()
+{
+	walk2(50,400000);
+	Go(20,200);
+	TurnRight(20,250);
+	Back(25,200);
+	walk3(50,40000);
+	Back(25,250);
+	TurnRight(20,250);
+	Go(20,400);
+}
 
 #endif

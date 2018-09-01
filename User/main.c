@@ -26,6 +26,7 @@ float Velocity_KP=10,Velocity_KI=10;	          //速度控制PID参数
 int RC_Velocity=20,RC_Position=300;         //设置遥控的速度和位置值
 //------------------------------------
 int cnt=0;
+
 int main()
 {
 	Stm32_Clock_Init(9);            //=====系统时钟设置
@@ -67,55 +68,27 @@ int main()
 	{
 		//walk(50,4000);
 		//出发
-Go(20,250);
+		Go(20,250);
 
-for	(cnt=0;cnt<5;cnt++)	
-{		
-		walk(50,40000);
-		Go(20,200);
+		for	(cnt=0;cnt<5;cnt++)
+		{
+			walk(50,40000);
+			Go(20,200);
+			Stop();
+			SetState(cnt); //到达垄1
+			delayy(400);
+			Go(10,200);
+		}
 		Stop();
-		SetState(cnt); //到达垄1
-		delayy(400);
-		Go(10,200);
-}	
-		Stop();
-		
 		Go(10,80);
 		TurnRight(20,250);
 		walk(50,600);
-		walk2(50,40000);
-		Go(20,100);
-		TurnRight(20,250);
-		Go(20,100);
-		walk(50,40000);
-		
-		Go(20,400);
-		TurnRight(20,250);
-		Go(20,400);
-		walk2(50,400000);
-		
 
-		Go(20,200);
-		TurnRight(20,250);
-		Back(25,200);
-		walk3(50,40000);
-		Back(25,250);
-		TurnRight(20,250);
-		Go(20,400);
-		walk2(50,400000);
-		
-		//2
-		Go(10,80);
-		TurnRight(20,250);
-		walk(50,600);
-		walk2(50,40000);
-		Go(20,100);
-		TurnRight(20,250);
-		Go(20,100);
-		walk(50,40000);
-		
-
-
+		for(cnt=0;cnt<6;cnt++)
+		{
+			strightR();
+			strightL();
+		}
 
 		Stop();
 		while(1);

@@ -23,6 +23,8 @@ void walk3(long int Runtime,long int Alltime);
 void GoPosition(long long int x,long long int y,long int time);
 
 
+void strightL(void);
+void strightR(void);
 
 
 #endif
