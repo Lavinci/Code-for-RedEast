@@ -10,6 +10,7 @@
 NVIC_InitTypeDef ns;
 
 extern u8 Ball[8];
+extern int index;
 void ServoInit(void)
 {
    GPIO_InitTypeDef GPIO_InitStructure;
@@ -139,9 +140,15 @@ void EXTI4_IRQHandler()
 	Set_Pwm(0,0,0,0);
 
 //这个是用树莓派返回的数值表来确认击打哪一边
-  if(Ball[1])
-    Servo_Left();//击打左臂
-
+  if(index % 2 == 1)
+	{	if(Ball[13 - 2 * index])
+			Servo_Left();//击打左臂
+	}
+	else
+	{
+		if(Ball[12 - 2 * index])
+			Servo_Left();
+	}
 //---------开启位置PID-------------------------		
 	ns.NVIC_IRQChannel=EXTI15_10_IRQn;
   ns.NVIC_IRQChannelCmd=ENABLE;
@@ -162,8 +169,15 @@ void EXTI3_IRQHandler()
 	Set_Pwm(0,0,0,0);
 
 //这个是用树莓派返回的数值表来确认击打哪一边
-  if(Ball[0])
-	  Servo_Right();//右击打
+  if(index % 2 == 1)
+	{	if(Ball[12 - 2 * index])
+			Servo_Right();//击打右臂
+	}
+	else
+	{
+		if(Ball[13 - 2 * index])
+			Servo_Right();
+	}
 
 //---------开启位置PID-------------------------		
 	ns.NVIC_IRQChannel=EXTI15_10_IRQn;

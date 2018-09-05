@@ -85,30 +85,13 @@ void EXTI_InitTree(void)
 void EXTI_EnableTree(void)
 {
 	NVIC_InitTypeDef ns;
+	EXTI_InitTypeDef es;
 	ns.NVIC_IRQChannel=EXTI4_IRQn;
-	ns.NVIC_IRQChannelPreemptionPriority=0;
+	ns.NVIC_IRQChannelPreemptionPriority=2;
 	ns.NVIC_IRQChannelSubPriority=0;
 	ns.NVIC_IRQChannelCmd=ENABLE;
 	NVIC_Init(&ns);
-
-}
-
-void EXTI_DisableTree(void)
-{
-	GPIO_InitTypeDef gs;
-	NVIC_InitTypeDef ns;
-	EXTI_InitTypeDef es;
-
-	gs.GPIO_Mode=GPIO_Mode_IPU;
-	gs.GPIO_Speed=GPIO_Speed_50MHz;
-	GPIO_Init(GPIOA,&gs);
-	GPIO_SetBits(GPIOA,GPIO_Pin_4);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA,ENABLE);
-
-	ns.NVIC_IRQChannel=EXTI4_IRQn;
-	ns.NVIC_IRQChannelPreemptionPriority=0;
-	ns.NVIC_IRQChannelSubPriority=0;
-	ns.NVIC_IRQChannelCmd=ENABLE;
+	ns.NVIC_IRQChannel=EXTI3_IRQn;
 	NVIC_Init(&ns);
 
 	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,GPIO_PinSource4);
@@ -116,6 +99,42 @@ void EXTI_DisableTree(void)
 	es.EXTI_Mode=EXTI_Mode_Interrupt;
 	es.EXTI_Trigger=EXTI_Trigger_Falling;
 	es.EXTI_LineCmd=ENABLE;
+	EXTI_Init(&es);
+	
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,GPIO_PinSource3);
+	es.EXTI_Line=EXTI_Line3;
+	es.EXTI_Mode=EXTI_Mode_Interrupt;
+	es.EXTI_Trigger=EXTI_Trigger_Falling;
+	es.EXTI_LineCmd=ENABLE;
+	EXTI_Init(&es);
+	
+}
+
+void EXTI_DisableTree(void)
+{
+	NVIC_InitTypeDef ns;
+	EXTI_InitTypeDef es;
+
+	ns.NVIC_IRQChannel=EXTI4_IRQn;
+	ns.NVIC_IRQChannelPreemptionPriority=0;
+	ns.NVIC_IRQChannelSubPriority=0;
+	ns.NVIC_IRQChannelCmd=DISABLE;
+	NVIC_Init(&ns);
+	
+	ns.NVIC_IRQChannel=EXTI3_IRQn;
+	ns.NVIC_IRQChannelCmd=DISABLE;
+	NVIC_Init(&ns);
+	
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,GPIO_PinSource4);
+	es.EXTI_Line=EXTI_Line4;
+	es.EXTI_Mode=EXTI_Mode_Interrupt;
+	es.EXTI_Trigger=EXTI_Trigger_Falling;
+	es.EXTI_LineCmd=DISABLE;
+	EXTI_Init(&es);
+	
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOA,GPIO_PinSource3);
+	es.EXTI_Line=EXTI_Line3;
+	es.EXTI_LineCmd=DISABLE;
 	EXTI_Init(&es);
 }
 

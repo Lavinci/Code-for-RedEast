@@ -144,9 +144,9 @@ void walk2(long int Runtime,long int Alltime)
 			case 0: Left(13,1);break;
 			//case 1: Right(10,1);break;
 			case 2:	Go(35,1);break;
-			case 3: TurnLeft(18,1);break;
+			case 3: TurnLeft(10,1);break;
 		//	case 4: TurnRight(10,1);break;
-		case 6: TurnRight(18,1);break;
+		case 6: TurnRight(10,1);break;
 		case 7:Right(13,1);break;
 		default:OLED_ShowString(10,40,"Unknow!!");OLED_Refresh_Gram();break;
 		}
@@ -186,22 +186,26 @@ void GoPosition(long int x,long int y,long int time)
 
 void strightR()
 {
+	EXTI_EnableTree();
 	walk2(50,40000);
 	Go(20,100);
 	TurnRight(20,250);
 	Go(20,100);
 	walk(50,40000);
+	EXTI_DisableTree();
 	Go(20,400);
 	TurnRight(20,250);
 	Go(20,400);
 }
 void strightL()
 {
+	EXTI_EnableTree();
 	walk2(50,400000);
-	Go(20,200);
+	Go(20,160);
 	TurnRight(20,250);
 	Back(25,200);
 	walk3(50,40000);
+	EXTI_DisableTree();
 	Back(25,250);
 	TurnRight(20,250);
 	Go(20,400);

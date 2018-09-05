@@ -26,9 +26,9 @@ void SetState(u8 pos)
     delayMs(10);
   }
 
-  if(left>8)  tree[pos-1]=1;
-  else        tree[pos-1]=0;
+  if(left>8)  tree[2 * pos]=1;
+  else        tree[2 * pos]=0;
 
-  if(right>8) tree[pos]=1;
-  else        tree[pos]=0;
+  if(right>8) tree[2 * pos - 1]=1;
+  else        tree[2 * pos - 1]=0;
 }

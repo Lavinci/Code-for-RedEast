@@ -26,6 +26,7 @@ float Velocity_KP=10,Velocity_KI=10;	          //速度控制PID参数
 int RC_Velocity=20,RC_Position=300;         //设置遥控的速度和位置值
 //------------------------------------
 int cnt=0;
+int index=0;
 
 int main()
 {
@@ -63,14 +64,14 @@ int main()
 	delayy(200);
 	OLED_ShowString(10,40,"Start");OLED_Refresh_Gram();
 	delayy(200);
-
+	EXTI_DisableTree();
+//	Servo_Left();
 	while(1)
 	{
-		//walk(50,4000);
 		//出发
-		Go(20,250);
+		Go(20,280);
 
-		for	(cnt=0;cnt<5;cnt++)
+		for	(cnt=1;cnt<6;cnt++)
 		{
 			walk(50,40000);
 			Go(20,200);
@@ -84,12 +85,21 @@ int main()
 		TurnRight(20,250);
 		walk(50,600);
 
-		for(cnt=0;cnt<6;cnt++)
+		for(cnt=1;cnt<6;cnt++)
 		{
+			index+=1;
 			strightR();
+			index+=1;
 			strightL();
 		}
 
+		strightR();
+		walk2(50,400000);
+		Go(20,160);
+		TurnRight(20,250);
+		Back(25,400);
+		
+		
 		Stop();
 		while(1);
 	}
